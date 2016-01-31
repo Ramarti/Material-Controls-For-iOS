@@ -164,6 +164,29 @@
     [_buttonCancel setTitle:_cancelTitle forState:normal];
 }
 
+- (void)setColor: (nonnull UIColor*) color {
+    _buttonOk.backgroundColor = color;
+    [_buttonOk setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _buttonOk.titleLabel.textColor = [UIColor whiteColor];
+    [_buttonCancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _buttonCancel.backgroundColor = color;
+
+    _header.customHeaderColor = color;
+    _header.customHeaderBackgroundColor = [self darkerColorForColor:color];
+    _calendar.customColor = color;
+}
+
+- (UIColor *)darkerColorForColor:(UIColor*) color
+{
+    CGFloat h, s, b, a;
+    if ([color getHue:&h saturation:&s brightness:&b alpha:&a])
+        return [UIColor colorWithHue:h
+                          saturation:s
+                          brightness:b * 0.75
+                               alpha:a];
+    return nil;
+}
+
 - (void)addSelfToMainWindow {
   UIView *view = [MDDeviceHelper getMainView];
   [self setFrame:view.bounds];

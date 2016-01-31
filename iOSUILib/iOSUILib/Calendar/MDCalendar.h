@@ -45,7 +45,8 @@ typedef NS_OPTIONS(NSInteger, MDCalendarCellState) {
 
 typedef NS_ENUM(NSInteger, MDCalendarTheme) {
   MDCalendarThemeLight = 1,
-  MDCalendarThemeDark = 2
+  MDCalendarThemeDark = 2,
+  MDCalendarThemeCustomLight = 3,
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -66,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(copy, nonatomic) NSDate *currentMonth;
 
 @property(assign, nonatomic) MDCalendarTheme theme;
+@property(copy, nonatomic) UIColor *customColor;
+
 @property(assign, nonatomic) NSUInteger firstWeekday;
 
 @property(strong, nonatomic) NSMutableDictionary *backgroundColors;

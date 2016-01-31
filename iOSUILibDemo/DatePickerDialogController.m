@@ -55,6 +55,7 @@
       
     MDDatePickerDialog *datePicker = [[MDDatePickerDialog alloc] init];
     _datePicker = datePicker;
+      [_datePicker setColor:[UIColor redColor]];
     _datePicker.minimumDate = date;
     _datePicker.selectedDate = date;
     _datePicker.delegate = self;

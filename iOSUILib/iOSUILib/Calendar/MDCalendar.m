@@ -75,6 +75,7 @@
 
 @synthesize theme = _theme;
 @synthesize firstWeekday = _firstWeekday;
+@synthesize customColor = _customColor;
 
 #pragma mark - Life Cycle && Initialize
 
@@ -164,7 +165,7 @@
 }
 
 - (void)initThemeColors {
-  _backgroundThemeColors = [NSMutableDictionary dictionaryWithCapacity:2];
+  _backgroundThemeColors = [NSMutableDictionary dictionaryWithCapacity:3];
 
   NSMutableDictionary *backgroundColorsLight =
       [NSMutableDictionary dictionaryWithCapacity:5];
@@ -186,10 +187,22 @@
   backgroundColorsDark[@(MDCalendarCellStatePlaceholder)] =
       [UIColor clearColor];
   backgroundColorsDark[@(MDCalendarCellStateToday)] = [UIColor clearColor];
+    
+    NSMutableDictionary *backgroundColorsCustomLight =
+    [NSMutableDictionary dictionaryWithCapacity:5];
+    backgroundColorsCustomLight[@(MDCalendarCellStateNormal)] = [UIColor clearColor];
+    backgroundColorsCustomLight[@(MDCalendarCellStateSelected)] =
+    [UIColor blueColor];
+    backgroundColorsCustomLight[@(MDCalendarCellStateDisabled)] = [UIColor clearColor];
+    backgroundColorsCustomLight[@(MDCalendarCellStatePlaceholder)] =
+    [UIColor clearColor];
+    backgroundColorsCustomLight[@(MDCalendarCellStateToday)] = [UIColor clearColor];
+    
 
   _backgroundThemeColors[@(MDCalendarThemeLight)] = backgroundColorsLight;
   _backgroundThemeColors[@(MDCalendarThemeDark)] = backgroundColorsDark;
-
+ _backgroundThemeColors[@(MDCalendarThemeCustomLight)] = backgroundColorsCustomLight;
+    
   NSMutableDictionary *titleColorsLight =
       [NSMutableDictionary dictionaryWithCapacity:8];
   titleColorsLight[@(MDCalendarCellStateNormal)] = [UIColor darkTextColor];
@@ -213,10 +226,23 @@
   titleColorsDark[@(MDCalendarCellStateWeekTitle)] = [UIColor lightGrayColor];
   titleColorsDark[@(MDCalendarCellStateMonthTitle)] = [UIColor whiteColor];
   titleColorsDark[@(MDCalendarCellStateButton)] = [UIColor whiteColor];
+    
+    NSMutableDictionary *titleColorsCustomLight =
+    [NSMutableDictionary dictionaryWithCapacity:8];
+    titleColorsCustomLight[@(MDCalendarCellStateNormal)] = [UIColor darkTextColor];
+    titleColorsCustomLight[@(MDCalendarCellStateSelected)] = [UIColor whiteColor];
+    titleColorsCustomLight[@(MDCalendarCellStateDisabled)] = [UIColor clearColor];
+    titleColorsCustomLight[@(MDCalendarCellStatePlaceholder)] = [UIColor clearColor];
+    titleColorsCustomLight[@(MDCalendarCellStateToday)] =
+    [UIColor blueColor];
+    titleColorsCustomLight[@(MDCalendarCellStateWeekTitle)] = [UIColor lightGrayColor];
+    titleColorsCustomLight[@(MDCalendarCellStateMonthTitle)] = [UIColor blackColor];
+    titleColorsCustomLight[@(MDCalendarCellStateButton)] = [UIColor blackColor];
 
-  _titleThemeColors = [NSMutableDictionary dictionaryWithCapacity:2];
+  _titleThemeColors = [NSMutableDictionary dictionaryWithCapacity:3];
   _titleThemeColors[@(MDCalendarThemeLight)] = titleColorsLight;
   _titleThemeColors[@(MDCalendarThemeDark)] = titleColorsDark;
+  _titleThemeColors[@(MDCalendarThemeCustomLight)] = titleColorsCustomLight;
 }
 
 - (void)setTheme:(MDCalendarTheme)theme {
@@ -229,6 +255,8 @@
       bgColor = [UIColorHelper colorWithRGBA:@"#263238"];
     } else if (_theme == MDCalendarThemeLight) {
       bgColor = [UIColor whiteColor];
+    } else if (_theme == MDCalendarThemeCustomLight) {
+        bgColor = [UIColor whiteColor];
     }
 
     [self setBackgroundColor:bgColor];
@@ -244,6 +272,32 @@
     [self reloadData];
   }
 }
+
+- (void)setCustomColor:(UIColor *)customColor {
+    NSMutableDictionary *titleColorsCustomLight =
+    [NSMutableDictionary dictionaryWithCapacity:8];
+    titleColorsCustomLight[@(MDCalendarCellStateNormal)] = [UIColor darkTextColor];
+    titleColorsCustomLight[@(MDCalendarCellStateSelected)] = [UIColor whiteColor];
+    titleColorsCustomLight[@(MDCalendarCellStateDisabled)] = [UIColor clearColor];
+    titleColorsCustomLight[@(MDCalendarCellStatePlaceholder)] = [UIColor clearColor];
+    titleColorsCustomLight[@(MDCalendarCellStateToday)] = customColor;
+    titleColorsCustomLight[@(MDCalendarCellStateWeekTitle)] = [UIColor lightGrayColor];
+    titleColorsCustomLight[@(MDCalendarCellStateMonthTitle)] = [UIColor blackColor];
+    titleColorsCustomLight[@(MDCalendarCellStateButton)] = [UIColor blackColor];
+    NSMutableDictionary *backgroundColorsCustomLight =
+    [NSMutableDictionary dictionaryWithCapacity:5];
+    backgroundColorsCustomLight[@(MDCalendarCellStateNormal)] = [UIColor clearColor];
+    backgroundColorsCustomLight[@(MDCalendarCellStateSelected)] = customColor;
+    backgroundColorsCustomLight[@(MDCalendarCellStateDisabled)] = [UIColor clearColor];
+    backgroundColorsCustomLight[@(MDCalendarCellStatePlaceholder)] =
+    [UIColor clearColor];
+    backgroundColorsCustomLight[@(MDCalendarCellStateToday)] = [UIColor clearColor];
+    
+    _backgroundThemeColors[@(MDCalendarThemeCustomLight)] = backgroundColorsCustomLight;
+    _titleThemeColors[@(MDCalendarThemeCustomLight)]= titleColorsCustomLight;
+    [self setTheme:MDCalendarThemeCustomLight];
+}
+
 
 - (void)layoutSubviews {
   _isDoingLayoutSubview = YES;

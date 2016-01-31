@@ -214,6 +214,9 @@
     } else if (_theme == MDCalendarThemeLight) {
       _headerBackgroundColor = [UIColorHelper colorWithRGBA:@"#009688"];
       _headerColor = [UIColorHelper colorWithRGBA:@"#00796B"];
+    } else if (_theme == MDCalendarThemeCustomLight) {
+        _headerBackgroundColor = _customHeaderColor;
+        _headerColor = _customHeaderBackgroundColor;
     }
 
     [self setBackgroundColor:_headerBackgroundColor];

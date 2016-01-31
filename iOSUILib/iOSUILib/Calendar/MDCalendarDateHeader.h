@@ -50,7 +50,9 @@ typedef NS_OPTIONS(NSInteger, MDCalendarMonthSymbolsFormat) {
 @property(assign, nonatomic) MDCalendarTheme theme;
 @property(nonatomic) UIColor* textColor;
 @property(nonatomic) UIColor* headerColor;
-@property(nonatomic) UIColor* headerBackgroundColor;
+@property(nonatomic) UIColor* customHeaderColor;
+@property(nonatomic,copy) UIColor* headerBackgroundColor;
+@property(nonatomic,copy) UIColor* customHeaderBackgroundColor;
 
 @property(nonatomic) MDCalendarMonthSymbolsFormat monthFormat;
 @property(nullable, nonatomic) NSDate* date;

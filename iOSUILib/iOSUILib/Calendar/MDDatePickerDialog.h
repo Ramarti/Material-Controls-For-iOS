@@ -38,6 +38,7 @@
 @property(weak, nonatomic) id<MDDatePickerDialogDelegate> delegate;
 
 - (void)show;
+- (void)setColor: (nonnull UIColor*) color;
 - (void)setTitleOk: (nonnull NSString *) okTitle andTitleCancel: (nonnull NSString *) cancelTitle;
 @end
 #endif
